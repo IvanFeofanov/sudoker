@@ -1,0 +1,9 @@
+bin/
+moc_dir/
+objects/
+rcc_dir/
+ui_dir/
+util/
+
+*.pro.user
+*.swp

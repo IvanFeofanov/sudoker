@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="logo.png">icons/abouLogo.png</file>
+    </qresource>
+</RCC>
