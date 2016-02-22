@@ -33,8 +33,8 @@ SuWorker::SuWorker(SuAppPreferences preferences, QObject *parent) :
 
 SuWorker::~SuWorker()
 {
+    delete searcher_;
     qDebug() << "SuWorker destruct";
-    release();
 }
 
 void SuWorker::updatePreferences(SuAppPreferences preferences)

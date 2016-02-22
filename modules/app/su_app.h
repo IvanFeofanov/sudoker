@@ -31,7 +31,7 @@ signals:
     void choose();
 
 private slots:
-
+    void slotQuit();
 
 public slots:
     void run ();

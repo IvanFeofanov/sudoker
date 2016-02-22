@@ -15,13 +15,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="labelTitle">
-     <property name="text">
-      <string>&lt;center&gt; Help browser &lt;/center&gt;</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QTextBrowser" name="textBrowser"/>
    </item>
    <item>

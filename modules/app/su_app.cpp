@@ -1,6 +1,7 @@
 #include "su_app.h"
 
 #include <QDebug>
+#include <QTimer>
 
 SuApp::SuApp(SuAppPreferences preferences, QObject *parent) :
     QObject(parent)
@@ -16,12 +17,24 @@ SuApp::SuApp(SuAppPreferences preferences, QObject *parent) :
     setup();
 
     mainWindow_->setup();
+    connect(worker_, SIGNAL(finished()),
+            this, SLOT(slotQuit()));
+//    QTimer::singleShot(5000, this, SIGNAL(stopWorker()));
+}
+void SuApp::slotQuit()
+{
+    qDebug() << "slotQuit";
 }
 
 SuApp::~SuApp()
 {
-    qDebug() << "SuApp destruct";
+    emit stopWorker();
+
+    thread_->wait();
+
     delete mainWindow_;
+
+    qDebug() << "SuApp destruct";
 }
 
 void SuApp::updatePreferences(SuAppPreferences preferences)
@@ -35,7 +48,7 @@ void SuApp::setup()
 {
     worker_     = new SuWorker  (preferences_);
     mainWindow_ = new MainWindow();
-    thread_     = new QThread();
+    thread_     = new QThread(this);
 
     worker_->moveToThread(thread_);
 
@@ -45,7 +58,7 @@ void SuApp::setup()
 
     //quit thread
     connect(worker_, SIGNAL(finished()),
-            thread_, SLOT(quit()));
+            thread_, SLOT(quit()), Qt::DirectConnection);
 
     //stop worker
     connect(this,    SIGNAL(stopWorker()),
@@ -54,10 +67,6 @@ void SuApp::setup()
     //delete worker
     connect(worker_, SIGNAL(finished()),
             worker_, SLOT(deleteLater()));
-
-    //delete thread
-    connect(thread_, SIGNAL(finished()),
-            thread_, SLOT(deleteLater()));
 
     //unpause worker
     connect(mainWindow_, SIGNAL(continueCapturing()),
@@ -100,10 +109,6 @@ void SuApp::setup()
     connect(worker_,     SIGNAL(numberReceived(std::vector<SuFieldCell>*,int)),
             mainWindow_, SLOT(setField(std::vector<SuFieldCell>*,int)));
 
-
-    //warning message
-//    connect(worker_,     SIGNAL(warning(QString)),
-//            mainWindow_, SLOT()
 
     //start
     thread_->start();

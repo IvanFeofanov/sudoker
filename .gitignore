@@ -1,9 +1,10 @@
 bin/
 moc_dir/
-objects/
+objects_dir/
 rcc_dir/
 ui_dir/
 util/
 
 *.pro.user
 *.swp
+Makefile

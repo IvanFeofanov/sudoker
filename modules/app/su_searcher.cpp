@@ -15,17 +15,15 @@ SuSearcher::SuSearcher(SuAppPreferences preferences, QObject *parent) :
 
     updatePreferences(preferences);
 
-//    qDebug() << "SuSearcher construct";
 }
 
-SuSearcher::SuSearcher()
-{
-    qDebug() << "SuSearcher destruct";
-}
+SuSearcher::SuSearcher(){ }
 
 SuSearcher::~SuSearcher()
 {
     emit finished();
+
+    qDebug() << "SuSearcher destruct";
 
     delete finder_;
     delete recognizer_;

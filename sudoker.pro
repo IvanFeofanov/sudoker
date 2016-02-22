@@ -2,7 +2,7 @@
 TARGET = sudoker
 
 DESTDIR     = bin
-OBJECTS_DIR = objects
+OBJECTS_DIR = objects_dir
 MOC_DIR     = moc_dir
 RCC_DIR     = rcc_dir
 UI_DIR      = ui_dir
