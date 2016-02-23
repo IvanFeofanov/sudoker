@@ -41,7 +41,7 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>Sudoku</string>
+     <string>Sudoker</string>
     </property>
     <addaction name="actionImage_from_file"/>
     <addaction name="actionVideo_capture"/>
