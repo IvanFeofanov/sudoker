@@ -31,7 +31,8 @@ HEADERS *= \
     $$PWD/su_capture_cell.h \                       #capture cell
     $$PWD/recognizer/su_abstract_recognizer.h \     #recognizer
     $$PWD/recognizer/su_am_recognizer.h \
-    $$PWD/finder/noname_algorithm/su_noname_finder.h
+    $$PWD/finder/noname_algorithm/su_noname_finder.h \
+    modules/capture/recognizer/trainData.h
 
 
 PATHS *= \

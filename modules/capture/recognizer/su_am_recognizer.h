@@ -21,7 +21,9 @@ public:
 
     int  train    (std::vector< std::vector<std::string> >& files);
     int  write    (std::string path);
+    int  writeToHeader(std::string path);
     int  read     (std::string path);
+    int  readFromArray();
 
 private:
     void init();

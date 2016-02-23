@@ -1,10 +1,16 @@
-#include <cassert>
-
 #include "su_am_recognizer.h"
+
+#include <cassert>
+#include <fstream>
+#include <algorithm>
+
+#include "trainData.h"
 
 SuAMRecognizer::SuAMRecognizer()
 {
     init();
+
+    readFromArray();
 }
 
 SuAMRecognizer::SuAMRecognizer(std::vector<std::vector<std::string> > &files)
@@ -68,7 +74,6 @@ int SuAMRecognizer::train(std::vector<std::vector<std::string> > &files)
                         center.y-su::RECT_OF_INTEREST.height/2,
                         su::RECT_OF_INTEREST.width,
                         su::RECT_OF_INTEREST.height);
-
         mask = sum(roi);
 
         masks_.push_back(mask);
@@ -255,8 +260,60 @@ int SuAMRecognizer::write(std::string path)
     return 0;
 }
 
+int SuAMRecognizer::writeToHeader(std::string path)
+{
+    std::ofstream file(path.c_str());
+    assert(file.is_open());
+
+    //write header
+    file << "#ifndef TRAIN_DATA_H\n";
+    file << "#define TRAIN_DATA_H\n";
+
+    for(int i = 0; i < nClasses_; i++)
+    {
+        //save mask
+        cv::Mat mask = masks_.at(i);
+
+        file << "float " << "mask_" << i << " [] {\n";
+
+        for(int y = 0; y < masks_.at(i).rows; y++){
+            for(int x = 0; x < masks_.at(i).cols; x++){
+                file << mask.at<float>(y, x) << " ,";
+            }
+            file << "\n";
+        }
+
+        file << "};\n";
+
+        file << "\n";
+
+        //save weight
+        cv::Mat weight = weights_.at(i);
+
+        file << "float " << "weight_" << i << " [] {\n";
+
+        for(int y = 0; y < masks_.at(i).rows; y++){
+            for(int x = 0; x < masks_.at(i).cols; x++){
+                file << mask.at<float>(y, x) << " ,";
+            }
+            file << "\n";
+        }
+
+        file << "};\n";
+
+        file << "\n";
+    }
+
+    file << "\n";
+    file << "#endif";
+
+    file.close();
+    return 0;
+}
+
 int SuAMRecognizer::read(std::string path)
 {
+//    readFromArray();
     cv::FileStorage storage(path, cv::FileStorage::READ);
     assert(storage.isOpened());
 
@@ -292,18 +349,60 @@ int SuAMRecognizer::read(std::string path)
     }
     storage.release();
 
-//    cv::namedWindow("he", 0);
-//    for(int i = 0; i < nClasses_; i++)
-//    {
-//        cv::Mat image;
-//        weights_.at(i).convertTo(image, CV_8UC1);
-//        cv::imshow("he", image);
-//        cv::waitKey(0);
-//    }
+////    cv::namedWindow("he", 0);
+////    for(int i = 0; i < nClasses_; i++)
+////    {
+////        cv::Mat image;
+////        weights_.at(i).convertTo(image, CV_8UC1);
+////        cv::imshow("he", image);
+////        cv::waitKey(0);
+////    }
 
     return 0;
 }
 
+int SuAMRecognizer::readFromArray()
+{
+    //read mask
+    masks_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, mask_0));
+    masks_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, mask_1));
+    masks_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, mask_2));
+    masks_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, mask_3));
+    masks_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, mask_4));
+    masks_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, mask_5));
+    masks_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, mask_6));
+    masks_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, mask_7));
+    masks_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, mask_8));
+
+    //read weight
+    weights_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, weight_0));
+    weights_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, weight_1));
+    weights_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, weight_2));
+    weights_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, weight_3));
+    weights_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, weight_4));
+    weights_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, weight_5));
+    weights_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, weight_6));
+    weights_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, weight_7));
+    weights_.push_back(
+        cv::Mat(su::RECT_OF_INTEREST, CV_32FC1, weight_8));
+}
 
 //cluster
 Cluster::Cluster()
