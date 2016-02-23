@@ -8,9 +8,11 @@ RCC_DIR     = rcc_dir
 UI_DIR      = ui_dir
 
 #opencv
-INCLUDEPATH += /usr/local/include/opencv
-INCLUDEPATH += /usr/local/lib
-LIBS        += -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_gpu -lopencv_ml
+unix: {
+    INCLUDEPATH += /usr/local/include/opencv
+    INCLUDEPATH += /usr/local/lib
+    LIBS        += -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_gpu -lopencv_ml
+}
 
 DEPENDPATH *= $$PATHS
 
@@ -23,7 +25,6 @@ HEADERS += $$PWD/include/version.h
 
 #VERSION = 2.5.5
 
-#packagesExist(opencv)
 
 RESOURCES += \
     ./res/doc.qrc
