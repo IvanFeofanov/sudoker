@@ -9,7 +9,7 @@ SuSearcher::SuSearcher(SuAppPreferences preferences, QObject *parent) :
 
     finder_     = new SuFindFieldOnFrame(new SuNonameFinder,
                                      source_ == IMAGE ? true : false);
-    recognizer_ = new SuAMRecognizer(preferences.pathToTrainData);
+    recognizer_ = new SuAMRecognizer(/*preferences.pathToTrainData*/);
 
     cameraId_   = -1;
 
@@ -38,7 +38,7 @@ void SuSearcher::updatePreferences(SuAppPreferences preferences)
     finder_->setSensitivityToMovement(preferences_.sensitivityToMovement);
 
     //recognizer
-    recognizer_->read(preferences_.pathToTrainData);
+//    recognizer_->read(preferences_.pathToTrainData);
 }
 
 void SuSearcher::imageProcessing(QString pathToImage)
