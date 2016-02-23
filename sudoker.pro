@@ -14,6 +14,14 @@ unix: {
     LIBS        += -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_gpu -lopencv_ml
 }
 
+win32 {
+        INCLUDEPATH += C:/opencv-2.4.9/opencv/build/install/include/opencv
+        INCLUDEPATH += C:/opencv-2.4.9/opencv/build/install/include
+        LIBS += C:/opencv-2.4.9/opencv/build/bin/libopencv_core249.dll
+        LIBS += C:/opencv-2.4.9/opencv/build/bin/libopencv_highgui249.dll
+        LIBS += C:/opencv-2.4.9/opencv/build/bin/libopencv_imgproc249.dll
+}
+
 DEPENDPATH *= $$PATHS
 
 include($$PWD/modules/app/app.pro)
