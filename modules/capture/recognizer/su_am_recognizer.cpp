@@ -27,6 +27,11 @@ SuAMRecognizer::SuAMRecognizer(std::string trainData)
     stat = read(trainData);
 }
 
+SuAMRecognizer::~SuAMRecognizer()
+{
+//    writeToHeader("./trainData.h");
+}
+
 void SuAMRecognizer::init()
 {
     nClasses_  = 9;
@@ -265,6 +270,8 @@ int SuAMRecognizer::writeToHeader(std::string path)
     std::ofstream file(path.c_str());
     assert(file.is_open());
 
+    file << std::scientific << std::setprecision(8);
+
     //write header
     file << "#ifndef TRAIN_DATA_H\n";
     file << "#define TRAIN_DATA_H\n";
@@ -294,7 +301,7 @@ int SuAMRecognizer::writeToHeader(std::string path)
 
         for(int y = 0; y < masks_.at(i).rows; y++){
             for(int x = 0; x < masks_.at(i).cols; x++){
-                file << mask.at<float>(y, x) << " ,";
+                file << weight.at<float>(y, x) << " ,";
             }
             file << "\n";
         }

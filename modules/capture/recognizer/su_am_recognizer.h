@@ -14,6 +14,7 @@ public:
     SuAMRecognizer();
     SuAMRecognizer(std::vector< std::vector<std::string> >& files);
     SuAMRecognizer(std::string trainData);
+    ~SuAMRecognizer();
 
     int  recognize(cv::Mat &image);
     void recognize(SUCells &cells);
