@@ -22,9 +22,7 @@ SuAMRecognizer::SuAMRecognizer(std::vector<std::vector<std::string> > &files)
 SuAMRecognizer::SuAMRecognizer(std::string trainData)
 {
     init();
-    int stat = 0;
-
-    stat = read(trainData);
+    read(trainData);
 }
 
 SuAMRecognizer::~SuAMRecognizer()
@@ -122,6 +120,8 @@ int SuAMRecognizer::train(std::vector<std::vector<std::string> > &files)
         weights_.push_back(weight);
 
    }
+
+    return 1;
 }
 
 int SuAMRecognizer::recognize(cv::Mat &image)
@@ -368,7 +368,7 @@ int SuAMRecognizer::read(std::string path)
     return 0;
 }
 
-int SuAMRecognizer::readFromArray()
+void SuAMRecognizer::readFromArray()
 {
     //read mask
     masks_.push_back(

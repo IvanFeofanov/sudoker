@@ -24,7 +24,7 @@ public:
     int  write    (std::string path);
     int  writeToHeader(std::string path);
     int  read     (std::string path);
-    int  readFromArray();
+    void readFromArray();
 
 private:
     void init();
