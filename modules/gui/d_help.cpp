@@ -32,8 +32,8 @@ Help::Help(QWidget *parent) :
             this, SLOT(showAgain(bool)));
 
     //set help page
-    ui->textBrowser->setSearchPaths(QStringList() << ":");
-    ui->textBrowser->setSource(QString("doc/help_page.html"));
+//    ui->textBrowser->setSearchPaths(QStringList() << ":");
+//    ui->textBrowser->setSource(QString("doc/help_page.html"));
 
 }
 
