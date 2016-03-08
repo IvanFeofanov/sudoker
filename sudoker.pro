@@ -15,11 +15,11 @@ unix: {
 }
 
 win32 {
-        INCLUDEPATH += C:/opencv-2.4.9/opencv/build/install/include/opencv
-        INCLUDEPATH += C:/opencv-2.4.9/opencv/build/install/include
-        LIBS += C:/opencv-2.4.9/opencv/build/bin/libopencv_core249.dll
-        LIBS += C:/opencv-2.4.9/opencv/build/bin/libopencv_highgui249.dll
-        LIBS += C:/opencv-2.4.9/opencv/build/bin/libopencv_imgproc249.dll
+    INCLUDEPATH += C:/opencv-2.4.9/opencv/build/install/include/opencv
+    INCLUDEPATH += C:/opencv-2.4.9/opencv/build/install/include
+    LIBS += C:/opencv-2.4.9/opencv/build/bin/libopencv_core249.dll
+    LIBS += C:/opencv-2.4.9/opencv/build/bin/libopencv_highgui249.dll
+    LIBS += C:/opencv-2.4.9/opencv/build/bin/libopencv_imgproc249.dll
 }
 
 DEPENDPATH *= $$PATHS

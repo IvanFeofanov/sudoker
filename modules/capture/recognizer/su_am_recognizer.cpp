@@ -68,7 +68,7 @@ int SuAMRecognizer::train(std::vector<std::vector<std::string> > &files)
             cv::add(sum, bin, sum);
         }
 
-        sum = sum * 1.0000f / (double)(nImages);
+        sum = sum / (double)(nImages);
 
         cv::Mat mask(su::RECT_OF_INTEREST, CV_32FC1);
         cv::Point center = getNumberCenter(sum);
@@ -97,7 +97,7 @@ int SuAMRecognizer::train(std::vector<std::vector<std::string> > &files)
         cv::add(middle, masks_.at(i), middle);
     }
 
-    middle = middle * 1.0000f / (double)(nClasses_);
+    middle = middle / (double)(nClasses_);
 
 //    middle.convertTo(middle, CV_8UC1);
 //    cv::namedWindow("middle", 0);
@@ -115,7 +115,7 @@ int SuAMRecognizer::train(std::vector<std::vector<std::string> > &files)
 //        cv::imshow("cell", weight);
 //        cv::waitKey(0);
 
-        weight = weight * 1.0000f / (double)(255);
+        weight = weight / (double)(255);
 
         weights_.push_back(weight);
 
